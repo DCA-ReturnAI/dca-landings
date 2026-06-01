@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Return Assessment · Digital Change Advisors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ─── DESIGN TOKENS ─────────────────────────────────────── */
+:root {
+  --dca-teal:         #2e8b76;
+  --dca-gold:         #a48111;
+  --dca-carbon:       #1e2a38;
+  --dca-white:        #ffffff;
+  --dca-terracotta:   #c2593f;
+  --dca-platinum:     #dfe3e1;
+  --dca-teal-subtle:  rgba(46,139,118,0.05);
+  --font-display:     'Marcellus', Georgia, serif;
+  --font-body:        'Montserrat', 'Helvetica Neue', sans-serif;
+  --section-padding:  80px;
+  --text-max-width:   720px;
+  --layout-max-width: 1100px;
+}
+
+/* ─── RESET & BASE ──────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--dca-carbon);
+  background: var(--dca-white);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.container {
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.section-pad {
+  padding: var(--section-padding) 0;
+}
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────────── */
+h1, h2 {
+  font-family: var(--font-display);
+  font-style: normal;
+  line-height: 1.3;
+}
+h1 { font-size: clamp(28px, 4vw, 48px); }
+h2 { font-size: clamp(24px, 3vw, 36px); }
+h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.4;
+}
+p { line-height: 1.6; }
+
+/* ─── SECTION LABELS ─────────────────────────────────────── */
+.section-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dca-teal);
+  display: block;
+  margin-bottom: 20px;
+}
+
+/* ─── BUTTONS ────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-block;
+  background: var(--dca-teal);
+  color: var(--dca-white);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 8px;
+  min-height: 52px;
+  padding: 14px 36px;
+  border: none;
+  cursor: pointer;
+  line-height: 1.3;
+  transition: opacity 0.2s ease;
+  text-align: center;
+}
+.btn-primary:hover { opacity: 0.88; }
+
+.btn-gold {
+  display: inline-block;
+  background: var(--dca-gold);
+  color: var(--dca-white);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 8px;
+  min-height: 52px;
+  padding: 14px 36px;
+  border: none;
+  cursor: pointer;
+  line-height: 1.3;
+  transition: opacity 0.2s ease;
+  text-align: center;
+}
+.btn-gold:hover { opacity: 0.88; }
+
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--dca-teal);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 8px;
+  min-height: 48px;
+  padding: 12px 28px;
+  border: 2px solid var(--dca-teal);
+  cursor: pointer;
+  line-height: 1.3;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+.btn-outline:hover {
+  background: var(--dca-teal);
+  color: var(--dca-white);
+}
+
+.cta-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.cta-wrap.centered { align-items: center; }
+.cta-support {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(30,42,56,0.65);
+  line-height: 1.5;
+}
+.cta-support.on-dark {
+  color: rgba(255,255,255,0.75);
+}
+
+/* ─── HEADER ─────────────────────────────────────────────── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--dca-white);
+  border-bottom: 1px solid var(--dca-platinum);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.logo {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--dca-carbon);
+  letter-spacing: -0.01em;
+}
+.logo span {
+  color: var(--dca-teal);
+}
+.header-cta {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--dca-teal);
+  border: 1.5px solid var(--dca-teal);
+  border-radius: 6px;
+  padding: 8px 18px;
+  transition: all 0.2s;
+}
+.header-cta:hover {
+  background: var(--dca-teal);
+  color: var(--dca-white);
+}
+
+/* ─── BLOQUE 1 · HERO ────────────────────────────────────── */
+#hero {
+  padding: 80px 0 72px;
+  background: var(--dca-white);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.hero-copy { max-width: 560px; }
+.hero-overtitle {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dca-teal);
+  margin-bottom: 22px;
+}
+.hero-copy h1 {
+  color: var(--dca-carbon);
+  margin-bottom: 20px;
+}
+.hero-sub {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--dca-teal);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.hero-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(30,42,56,0.8);
+  margin-bottom: 36px;
+  line-height: 1.65;
+}
+/* Hero visual */
+.hero-visual {
+  background: var(--dca-teal-subtle);
+  border: 1px solid var(--dca-platinum);
+  border-radius: 12px;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.hero-metric {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.hero-metric-num {
+  font-family: var(--font-display);
+  font-size: 44px;
+  color: var(--dca-teal);
+  line-height: 1;
+  min-width: 100px;
+  text-align: right;
+}
+.hero-metric-label {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--dca-carbon);
+  line-height: 1.5;
+  padding-top: 8px;
+}
+.hero-metric-divider {
+  border: none;
+  border-top: 1px solid var(--dca-platinum);
+}
+
+/* ─── BLOQUE 2 · ENTREGABLES ─────────────────────────────── */
+#entregables {
+  background: var(--dca-white);
+  border-top: 1px solid var(--dca-platinum);
+  border-bottom: 1px solid var(--dca-platinum);
+}
+.entregables-intro {
+  text-align: center;
+  max-width: var(--text-max-width);
+  margin: 0 auto 56px;
+}
+.entregables-intro h2 {
+  margin-bottom: 20px;
+  color: var(--dca-carbon);
+}
+.entregables-intro p {
+  font-size: 16px;
+  color: rgba(30,42,56,0.75);
+}
+.entregables-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.entregable-card {
+  border: 1px solid var(--dca-platinum);
+  border-top: 3px solid var(--dca-gold);
+  border-radius: 8px;
+  padding: 32px 28px;
+  background: var(--dca-white);
+}
+.entregable-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dca-gold);
+  margin-bottom: 14px;
+}
+.entregable-card h3 {
+  font-size: 17px;
+  color: var(--dca-carbon);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.entregable-card p {
+  font-size: 15px;
+  color: rgba(30,42,56,0.75);
+  line-height: 1.6;
+}
+
+/* ─── BLOQUE 3 · TESTIMONIALES ───────────────────────────── */
+#testimoniales {
+  background: var(--dca-teal-subtle);
+}
+.testimoniales-header {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 52px;
+}
+.testimoniales-header h2 { margin-bottom: 12px; }
+.testimoniales-header p {
+  font-size: 15px;
+  color: rgba(30,42,56,0.65);
+}
+.testimoniales-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.testimonial-card {
+  background: var(--dca-white);
+  border-radius: 8px;
+  padding: 32px 28px;
+  border: 1px solid var(--dca-platinum);
+}
+.testimonial-quote {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--dca-carbon);
+  margin-bottom: 28px;
+  font-style: italic;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.testimonial-photo {
+  width: 52px;
+  height: 64px;
+  border-radius: 8px;
+  background: var(--dca-platinum);
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.testimonial-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--dca-platinum) 0%, #c8ceca 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.testimonial-photo-initials {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--dca-teal);
+  font-weight: 400;
+}
+.testimonial-meta { flex: 1; }
+.testimonial-name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--dca-carbon);
+  line-height: 1.3;
+}
+.testimonial-role {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  color: rgba(30,42,56,0.6);
+  margin-top: 2px;
+}
+.testimonial-org {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--dca-teal);
+  margin-top: 2px;
+}
+
+/* ─── BLOQUE 4 · PROCESO ─────────────────────────────────── */
+#proceso {
+  background: var(--dca-white);
+}
+.proceso-header {
+  text-align: center;
+  max-width: var(--text-max-width);
+  margin: 0 auto 56px;
+}
+.proceso-header h2 { margin-bottom: 16px; }
+.proceso-header p {
+  font-size: 16px;
+  color: rgba(30,42,56,0.75);
+}
+.proceso-timeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  position: relative;
+  margin-bottom: 48px;
+}
+.proceso-timeline::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--dca-platinum);
+  z-index: 0;
+}
+.proceso-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 12px;
+  position: relative;
+  z-index: 1;
+}
+.step-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--dca-teal);
+  color: var(--dca-white);
+  font-family: var(--font-display);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+  border: 3px solid var(--dca-white);
+  box-shadow: 0 0 0 2px var(--dca-teal);
+}
+.step-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--dca-teal);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.step-duration {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(30,42,56,0.5);
+  margin-bottom: 10px;
+}
+.step-desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(30,42,56,0.75);
+  line-height: 1.6;
+}
+.proceso-aria-note {
+  background: var(--dca-teal-subtle);
+  border-top: 1px solid var(--dca-platinum);
+  border-bottom: 1px solid var(--dca-platinum);
+  border-radius: 4px;
+  padding: 24px 32px;
+  max-width: var(--text-max-width);
+  margin: 0 auto;
+}
+.proceso-aria-note p {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(30,42,56,0.8);
+  line-height: 1.65;
+}
+
+/* ─── BLOQUE 5 · PARA QUIÉN ES ───────────────────────────── */
+#para-quien {
+  background: var(--dca-teal-subtle);
+}
+.para-quien-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px;
+}
+.para-quien-header h2 { margin-bottom: 16px; }
+.para-quien-header p {
+  font-size: 16px;
+  color: rgba(30,42,56,0.7);
+}
+.para-quien-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.para-quien-col {
+  background: var(--dca-white);
+  border-radius: 8px;
+  padding: 32px 28px;
+  border: 1px solid var(--dca-platinum);
+}
+.para-quien-col.yes {
+  border-left: 4px solid var(--dca-teal);
+}
+.para-quien-col.no {
+  border-left: 4px solid var(--dca-platinum);
+}
+.para-quien-col-title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.para-quien-col.yes .para-quien-col-title { color: var(--dca-teal); }
+.para-quien-col.no .para-quien-col-title { color: rgba(30,42,56,0.5); }
+.check-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--dca-teal);
+  color: var(--dca-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.x-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--dca-platinum);
+  color: rgba(30,42,56,0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.para-quien-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.para-quien-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(30,42,56,0.82);
+}
+.para-quien-list li .icon-wrap {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ─── BLOQUE 6 · ANCLAJE ECONÓMICO ──────────────────────── */
+#anclaje {
+  background: var(--dca-white);
+  border-top: 1px solid var(--dca-platinum);
+}
+.anclaje-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 52px;
+}
+.anclaje-header h2 { margin-bottom: 0; }
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 48px;
+  border: 1px solid var(--dca-platinum);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.metric-item {
+  padding: 36px 32px;
+  text-align: center;
+  background: var(--dca-white);
+  border-left: 4px solid transparent;
+}
+.metric-item:nth-child(1) { border-left-color: var(--dca-gold); }
+.metric-item:nth-child(2) { border-left-color: var(--dca-gold); }
+.metric-item:nth-child(3) { border-left-color: var(--dca-gold); }
+.metric-value {
+  font-family: var(--font-display);
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.metric-value.teal { color: var(--dca-teal); }
+.metric-value.terracota { color: var(--dca-terracotta); }
+.metric-value.carbon { color: var(--dca-carbon); }
+.metric-sublabel {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  color: rgba(30,42,56,0.55);
+  line-height: 1.4;
+}
+.anclaje-copy {
+  max-width: var(--text-max-width);
+  margin: 0 auto;
+  font-size: 16px;
+  color: rgba(30,42,56,0.8);
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* ─── BLOQUE 7 · CTA PRINCIPAL (FONDO CARBÓN) ────────────── */
+/* Footer estructural — excepción brand book DCA 2026: el footer usa carbón como elemento estructural universal */
+#cta-principal {
+  background: var(--dca-carbon);
+  padding: 96px 0;
+}
+.cta-principal-inner {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.cta-section-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  display: block;
+  margin-bottom: 24px;
+}
+.cta-principal-inner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 36px);
+  color: var(--dca-white);
+  margin-bottom: 20px;
+}
+.cta-principal-copy {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 40px;
+  line-height: 1.65;
+}
+.cta-form {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 36px 40px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.form-full { grid-column: 1 / -1; }
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-group label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.04em;
+}
+.form-group input,
+.form-group select {
+  height: 46px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: var(--dca-white);
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 0 14px;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ffffff' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.form-group select option {
+  background: var(--dca-carbon);
+  color: var(--dca-white);
+}
+.form-group input::placeholder { color: rgba(255,255,255,0.3); }
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--dca-gold);
+}
+.form-submit-wrap {
+  margin-top: 20px;
+  text-align: center;
+}
+.btn-gold.full { width: 100%; }
+
+/* ─── BLOQUE 8 · CREDIBILIDAD ────────────────────────────── */
+#credibilidad {
+  background: var(--dca-white);
+  border-top: 1px solid var(--dca-platinum);
+}
+.credibilidad-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.credibilidad-photo {
+  border-radius: 8px;
+  background: var(--dca-teal-subtle);
+  border: 1px solid var(--dca-platinum);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.credibilidad-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dca-teal-subtle);
+}
+.credibilidad-photo-initials {
+  font-family: var(--font-display);
+  font-size: 64px;
+  color: var(--dca-teal);
+  opacity: 0.5;
+}
+.credibilidad-copy h2 { margin-bottom: 16px; }
+.credibilidad-copy > p {
+  font-size: 16px;
+  color: rgba(30,42,56,0.8);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+.credenciales-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.credenciales-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  color: rgba(30,42,56,0.8);
+  line-height: 1.5;
+}
+.cred-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dca-teal);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+/* ─── BLOQUE 9 · REFUERZO LOSS AVERSION ─────────────────── */
+#refuerzo {
+  background: var(--dca-teal-subtle);
+  border-top: 1px solid var(--dca-platinum);
+  border-bottom: 1px solid var(--dca-platinum);
+}
+.refuerzo-inner {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.refuerzo-inner h2 {
+  margin-bottom: 24px;
+  color: var(--dca-carbon);
+}
+.refuerzo-inner p {
+  font-size: 16px;
+  color: rgba(30,42,56,0.78);
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+/* ─── BLOQUE 10 · CONECTORES ─────────────────────────────── */
+#conectores {
+  background: var(--dca-white);
+}
+.conectores-header {
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto 48px;
+}
+.conectores-header h2 { margin-bottom: 12px; }
+.conectores-header p {
+  font-size: 15px;
+  color: rgba(30,42,56,0.6);
+}
+.conectores-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.conector-card {
+  border: 1px solid var(--dca-platinum);
+  border-radius: 8px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.conector-sublabel {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dca-teal);
+}
+.conector-card h3 {
+  color: var(--dca-carbon);
+  font-size: 17px;
+}
+.conector-card p {
+  font-size: 15px;
+  color: rgba(30,42,56,0.72);
+  flex: 1;
+  line-height: 1.6;
+}
+
+/* ─── BLOQUE 11 · TAGLINE ────────────────────────────────── */
+#tagline {
+  padding: 80px 0 48px;
+  background: var(--dca-white);
+}
+.tagline-inner {
+  text-align: center;
+}
+.tagline-text {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 30px);
+  color: var(--dca-teal);
+  line-height: 1.3;
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+/* Footer estructural — excepción brand book DCA 2026 al límite de 1 bloque carbón */
+footer {
+  background: var(--dca-carbon);
+  padding: 48px 0 36px;
+}
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+.footer-logo {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--dca-white);
+}
+.footer-tagline-sub {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+}
+.footer-divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+.footer-copy {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ─── RESPONSIVE — MOBILE FIRST ─────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 56px;
+  }
+
+  /* Botones full-width en móvil */
+  .btn-primary,
+  .btn-gold,
+  .btn-outline {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+  .cta-wrap { align-items: stretch; }
+
+  /* Hero */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero-visual { padding: 32px 24px; }
+  .hero-metric-num { font-size: 36px; min-width: 80px; }
+
+  /* Entregables */
+  .entregables-grid { grid-template-columns: 1fr; }
+
+  /* Testimoniales — stack vertical, SIN carrusel */
+  .testimoniales-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Proceso — timeline vertical en móvil */
+  .proceso-timeline {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .proceso-timeline::before { display: none; }
+  .proceso-step {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 20px;
+    padding: 0;
+  }
+  .step-circle { margin-bottom: 0; flex-shrink: 0; }
+  .step-content { flex: 1; }
+  .step-desc { font-size: 16px; }
+
+  /* Para quién */
+  .para-quien-grid { grid-template-columns: 1fr; }
+
+  /* Métricas B6 — grid 2+1 en móvil (corrección C6) */
+  .metrics-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .metric-item:last-child {
+    grid-column: 1 / -1;
+    border-left: none;
+    border-top: 1px solid var(--dca-platinum);
+  }
+  .metric-value { font-size: clamp(28px, 8vw, 40px); }
+
+  /* Formulario */
+  .form-grid { grid-template-columns: 1fr; }
+  .cta-form { padding: 24px 20px; }
+
+  /* Credibilidad */
+  .credibilidad-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .credibilidad-photo {
+    max-width: 200px;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+  }
+
+  /* Conectores */
+  .conectores-grid { grid-template-columns: 1fr; }
+
+  /* Tagline — tamaño explícito en móvil (corrección C8) */
+  .tagline-text { font-size: clamp(22px, 5.5vw, 24px); }
+
+  /* Header */
+  .header-cta { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-metric { flex-direction: column; gap: 4px; }
+  .hero-metric-num { min-width: auto; text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <div class="logo">Digital Change <span>Advisors</span></div>
+    <a href="#cta-principal" class="header-cta">Agendar sesión de análisis</a>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOQUE 1 · HERO / CONTEXTO DE LLEGADA
+════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+
+      <div class="hero-copy">
+        <span class="hero-overtitle">AI Return Assessment · Nivel 3 · $5,000</span>
+        <h1>El diagnóstico presencial que cuantifica los 10 obstáculos por los que tu inversión en IA todavía no produce retorno medible.</h1>
+        <p class="hero-sub">Sesión presencial con hasta 20 líderes, reporte integrado y plan de intervención 30-60-90 días.</p>
+        <p class="hero-body">Digital Change Advisors mide los 10 obstáculos humanos y organizacionales que separan tu inversión en IA del retorno documentado. Lo facilita César Lozano, autor del Modelo ARIA. Lo han aplicado Subocol, Susuerte y SUMMA del Grupo Argos, entre más de 70 organizaciones en 17 países.</p>
+
+        <div class="cta-wrap">
+          <a href="#cta-principal" class="btn-primary" style="display:inline-block;width:auto;">Agendar mi sesión de análisis</a>
+          <span class="cta-support">30 minutos · Sin costo · Sin compromiso de avanzar</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-metric">
+          <div class="hero-metric-num">10</div>
+          <div class="hero-metric-label">obstáculos humanos y organizacionales medidos con tus líderes</div>
+        </div>
+        <hr class="hero-metric-divider">
+        <div class="hero-metric">
+          <div class="hero-metric-num">20</div>
+          <div class="hero-metric-label">líderes participantes en la sesión presencial de diagnóstico</div>
+        </div>
+        <hr class="hero-metric-divider">
+        <div class="hero-metric">
+          <div class="hero-metric-num">90</div>
+          <div class="hero-metric-label">días del plan de intervención con responsables y métricas de seguimiento</div>
+        </div>
+        <hr class="hero-metric-divider">
+        <div class="hero-metric">
+          <div class="hero-metric-num">3–4</div>
+          <div class="hero-metric-label">semanas de proceso total, desde la llamada inicial a la entrega del plan</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOQUE 2 · LOS TRES ENTREGABLES DEL ASSESSMENT
+════════════════════════════════════════════════════════ -->
+<section id="entregables" class="section-pad">
+  <div class="container">
+
+    <div class="entregables-intro">
+      <span class="section-label">Lo que obtienes</span>
+      <h2>Tres entregables, descritos con precisión operativa: la sesión presencial, el reporte integrado y el plan de intervención 30-60-90 días.</h2>
+      <p style="margin-top:16px;">Cada entregable está descrito para que tu equipo de dirección pueda visualizarlo, calcular su valor y planificar su uso desde el primer día post-Assessment.</p>
+    </div>
+
+    <div class="entregables-grid">
+
+      <div class="entregable-card">
+        <div class="entregable-label">Entregable 1</div>
+        <h3>Sesión presencial · medio día · hasta 20 líderes</h3>
+        <p>Aplicación facilitada de los instrumentos del Modelo ARIA con tu equipo de liderazgo. Los participantes producen evaluaciones individuales sobre los 10 obstáculos sistémicos presentes en tu organización. La sesión identifica patrones de adopción que tu equipo no había articulado con claridad.</p>
+      </div>
+
+      <div class="entregable-card">
+        <div class="entregable-label">Entregable 2</div>
+        <h3>Reporte integrado de liderazgo · entrega digital y física</h3>
+        <p>Consolida la visión de tus 20 líderes sobre los 10 obstáculos medidos, referenciada contra el benchmark de tu sector. Incluye el Índice de Urgencia Global (IUG), la cuantificación de pérdida de valor por adopción incompleta, y las prioridades de intervención. Es el reporte que tu CFO necesita para evaluar exposición y tu CTO necesita para calibrar la siguiente decisión de inversión.</p>
+      </div>
+
+      <div class="entregable-card">
+        <div class="entregable-label">Entregable 3</div>
+        <h3>Sesión de presentación · plan de intervención a 30, 60 y 90 días</h3>
+        <p>Tres horizontes operativos con estrategias priorizadas, responsables sugeridos, métricas de seguimiento y timeline de captura de valor. Tu equipo sale de la sesión con un plan ejecutable, no con un reporte de recomendaciones. Es el momento donde el diagnóstico se convierte en decisiones.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOQUE 3 · TESTIMONIALES
+     Set: Rubén Darío Cañas · Diego Parra · Julián Hurtado
+     Fotos: rectangulares 8px radius. Stack en móvil.
+════════════════════════════════════════════════════════ -->
+<section id="testimoniales" class="section-pad">
+  <div class="container">
+
+    <div class="testimoniales-header">
+      <span class="section-label">Organizaciones que lo aplicaron</span>
+      <h2>Lo que dicen quienes pasaron por el Assessment</h2>
+      <p>Tres industrias distintas. Un diagnóstico específico para cada una.</p>
+    </div>
+
+    <div class="testimoniales-grid">
+
+      <!-- Testimonial 1: Rubén Darío Cañas — Subocol -->
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"El AI Return Assessment nos entregó un número que no teníamos: un IUG de 48.4 sobre 100. Eso le puso nombre a lo que intuíamos — el 35% de la inversión en IA no estaba produciendo retorno por obstáculos que ya existían en la organización antes de la tecnología. Con ese dato, tuvimos la conversación que necesitábamos tener con la junta."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-photo">
+            <div class="testimonial-photo-placeholder">
+              <span class="testimonial-photo-initials">RC</span>
+            </div>
+          </div>
+          <div class="testimonial-meta">
+            <div class="testimonial-name">Rubén Darío Cañas A.</div>
+            <div class="testimonial-role">CEO</div>
+            <div class="testimonial-org">Subocol</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2: Diego Parra — SUMMA / Grupo Argos -->
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"La sesión presencial con nuestros líderes fue distinta a cualquier proceso de diagnóstico que habíamos hecho antes. Los instrumentos del Modelo ARIA pusieron sobre la mesa la realidad de la organización — no lo que cada líder pensaba que los demás querían escuchar. El reporte que recibimos describía el 100% de nuestra realidad, y las prioridades de intervención eran accionables desde el primer día."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-photo">
+            <div class="testimonial-photo-placeholder">
+              <span class="testimonial-photo-initials">DP</span>
+            </div>
+          </div>
+          <div class="testimonial-meta">
+            <div class="testimonial-name">Diego Parra</div>
+            <div class="testimonial-role">Gerente de TI</div>
+            <div class="testimonial-org">SUMMA — Grupo Argos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3: Julián Hurtado — Susuerte -->
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Lo que me sorprendió fue la precisión. César no llegó con un marco genérico de 'gestión del cambio'. El Assessment diagnosticó los obstáculos específicos de nuestra operación, y el plan de intervención tenía los nombres correctos, los plazos correctos y las métricas que nosotros ya usábamos para medir el negocio. Eso no se improvisa."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-photo">
+            <div class="testimonial-photo-placeholder">
+              <span class="testimonial-photo-initials">JH</span>
+            </div>
+          </div>
+          <div class="testimonial-meta">
+            <div class="testimonial-name">Julián Hurtado</div>
+            <div class="testimonial-role">CEO</div>
+            <div class="testimonial-org">Susuerte S.A.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOQUE 4 · PROCESO PASO A PASO
+     Con diferenciación terminológica ARIA / Solución ReturnAI
+════════════════════════════════════════════════════════ -->
+<section id="proceso" class="section-pad">
+  <div class="container">
+
+    <div class="proceso-header">
+      <span class="section-label">Cómo opera el Assessment</span>
+      <h2>Cómo opera el AI Return Assessment, de la llamada inicial a la entrega del plan 30-60-90.</h2>
+      <p style="margin-top:16px;">Cada etapa con duración, qué ocurre operativamente y qué compromiso de tu equipo se requiere. El Assessment es un proceso predecible de 3 a 4 semanas, no un evento puntual.</p>
+    </div>
+
+    <div class="proceso-timeline">
+
+      <div class="proceso-step">
+        <div class="step-circle">1</div>
+        <div class="step-content">
+          <div class="step-label">Llamada de diagnóstico</div>
+          <div class="step-duration">30 minutos · sin costo</div>
+          <p class="step-desc">Conversación con un consultor senior de DCA. Determinamos juntos si el Assessment es el paso correcto para tu organización. Si concluimos que no lo es, te lo decimos directamente.</p>
+        </div>
+      </div>
+
+      <div class="proceso-step">
+        <div class="step-circle">2</div>
+        <div class="step-content">
+          <div class="step-label">Preparación customizada</div>
+          <div class="step-duration">1-2 semanas</div>
+          <p class="step-desc">Adaptamos los instrumentos del Modelo ARIA al contexto de tu sector, escala y momento de adopción de IA. Calibración previa que la sesión presencial aprovecha desde el primer minuto.</p>
+        </div>
+      </div>
+
+      <div class="proceso-step">
+        <div class="step-circle">3</div>
+        <div class="step-content">
+          <div class="step-label">Sesión presencial</div>
+          <div class="step-duration">Medio día · hasta 20 líderes</div>
+          <p class="step-desc">Aplicación facilitada de los instrumentos con tu equipo de liderazgo. Tus líderes producen evaluaciones individuales y patrones colectivos. La sesión se programa en tu sede o en un espacio que tu organización defina.</p>
+        </div>
+      </div>
+
+      <div class="proceso-step">
+        <div class="step-circle">4</div>
+        <div class="step-content">
+          <div class="step-label">Análisis y reporte integrado</div>
+          <div class="step-duration">1-2 semanas</div>
+          <p class="step-desc">Procesamos la información cualitativa y cuantitativa con las 14 herramientas propietarias del Modelo ARIA. Construimos el reporte con el referenciamiento sectorial y las prioridades de intervención. Entrega digital y física.</p>
+        </div>
+      </div>
+
+      <div class="proceso-step">
+        <div class="step-circle">5</div>
+        <div class="step-content">
+          <div class="step-label">Sesión de presentación</div>
+          <div class="step-duration">Medio día</div>
+          <p class="step-desc">Entrega presencial del reporte y del plan de intervención 30-60-90 días, con responsables sugeridos y métricas de seguimiento. Tu equipo sale con la siguiente acción definida y cronometrada.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Línea de diferenciación ARIA / Solución ReturnAI — OBLIGATORIA -->
+    <div class="proceso-aria-note">
+      <p>El Assessment aplica el Modelo ARIA para diagnosticar los obstáculos específicos de tu organización. Cuando los resultados lo justifican, la Solución ReturnAI —6 sprints, 14 herramientas propietarias, 120 días— convierte ese diagnóstico en retorno documentado.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOQUE 5 · PARA QUIÉN ES ESTE ASSESSMENT
+     Fondo: var(--dca-teal-subtle) — NUNCA teal sólido
+════════════════════════════════════════════════════════ -->
+<section id="para-quien" class="section-pad">
+  <div class="container">
+
+    <div class="para-quien-header">
+      <span class="section-label">Calificación previa</span>
+      <h2>El AI Return Assessment es para organizaciones con inversión activa en IA y necesidad de retorno medible en los próximos 120 días.</h2>
+      <p style="margin-top:16px;">El Assessment no aplica a todas las organizaciones. Esta sección te permite calificarte antes de invertir 30 minutos en la llamada de diagnóstico.</p>
+    </div>
+
+    <div class="para-quien-grid">
+
+      <div class="para-quien-col yes">
+        <div class="para-quien-col-title">
+          <span class="check-icon">✓</span>
+          Es para tu organización si…
+        </div>
+        <ul class="para-quien-list">
+          <li>
+            <span class="icon-wrap"><span class="check-icon" style="width:18px;height:18px;font-size:10px;">✓</span></span>
+            Ya invirtió en IA (licencias, plataformas, proyectos) y el retorno todavía no es medible
+          </li>
+          <li>
+            <span class="icon-wrap"><span class="check-icon" style="width:18px;height:18px;font-size:10px;">✓</span></span>
+            Tiene un equipo de liderazgo entre 10 y 20 personas con responsabilidad directa sobre el ROI de la inversión
+          </li>
+          <li>
+            <span class="icon-wrap"><span class="check-icon" style="width:18px;height:18px;font-size:10px;">✓</span></span>
+            Necesita resultados visibles en los próximos 120 días, no en horizontes abiertos
+          </li>
+          <li>
+            <span class="icon-wrap"><span class="check-icon" style="width:18px;height:18px;font-size:10px;">✓</span></span>
+            El CEO o el Director General está dispuesto a participar en la sesión de presentación de resultados
+          </li>
+        </ul>
+      </div>
+
+      <div class="para-quien-col no">
+        <div class="para-quien-col-title">
+          <span class="x-icon">✕</span>
+          No es el momento correcto si…
+        </div>
+        <ul class="para-quien-list">
+          <li>
+            <span class="icon-wrap"><span class="x-icon" style="width:18px;height:18px;font-size:10px;">✕</span></span>
+            Tu organización todavía no ha invertido en IA y está evaluando si hacerlo — en ese caso, el AI Return Test gratuito es el punto de entrada correcto
+          </li>
+          <li>
+            <span class="icon-wrap"><span class="x-icon" style="width:18px;height:18px;font-size:10px;">✕</span></span>
+            Buscas un programa de capacitación en herramientas de IA — el Assessment no es ese servicio
+          </li>
+          <li>
+            <span class="icon-wrap"><span class="x-icon" style="width:18px;height:18px;font-size:10px;">✕</span></span>
+            El proyecto de IA está en fase de selección de proveedor tecnológico — esa decisión es previa al Assessment
+          </li>
+          <li>
+            <span class="icon-wrap"><span class="x-icon" style="width:18px;height:18px;font-size:10px;">✕</span></span>
+            No hay un C-Level dispuesto a tomar decisiones sobre los hallazgos del diagnóstico
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOQUE 6 · ANCLAJE ECONÓMICO / LOSS AVERSION
+     Gold: solo border-left en métricas (presupuesto controlado)
+     Terracota: 35% (alerta de pérdida)
+     Marcellus métricas: 28-32px en móvil (corrección C6)
+════════════════════════════════════════════════════════ -->
+<section id="anclaje" class="section-pad">
+  <div class="container">
+
+    <div class="anclaje-header">
+      <span class="section-label">La ecuación financiera</span>
+      <h2>$5,000 protege una inversión en IA que típicamente supera los $300,000 anuales — y que sin arquitectura de adopción pierde 35% de captura de valor.</h2>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric-item">
+        <div class="metric-value teal">$300K+</div>
+        <div class="metric-sublabel">inversión anual típica en IA<br>(licencias, integración, headcount)</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value terracota">35%</div>
+        <div class="metric-sublabel">pérdida de captura de valor<br>documentada en Subocol</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value carbon">$5,000</div>
+        <div class="metric-sublabel">AI Return Assessment<br>diagnóstico en 3-4 semanas</div>
+      </div>
+    </div>
+
+    <p class="anclaje-copy">La inversión típica anual en IA de una organización mediana-grande supera los $300,000 entre licencias, plataformas, integración y headcount asignado. Cuando la adopción se queda en 23-30% — no en el 70%+ que documenta el Modelo ARIA — la captura de valor se queda corta. En Subocol esa pérdida se cuantificó en 35%. $5,000 es fracción del costo de un mes adicional sin arquitectura de adopción.</p>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOQUE 7 · CTA PRINCIPAL
+     ÚNICO bloque con fondo carbón (#1e2a38)
+     Botón dorado. Formulario 5 campos (corrección C3).
+════════════════════════════════════════════════════════ -->
+<section id="cta-principal">
+  <div class="container">
+    <div class="cta-principal-inner">
+
+      <span class="cta-section-label">Próximo paso</span>
+      <h2>Una conversación de 30 minutos define si el Assessment es el paso correcto para tu organización — y si no lo es, te lo decimos directamente.</h2>
+      <p class="cta-principal-copy">Sin pitch. Sin presión de contratar. La llamada tiene un solo objetivo: determinar si existe un caso de negocio para el diagnóstico. Tu tiempo es el único costo de esa conversación.</p>
+
+      <div class="cta-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
+          </div>
+          <div class="form-group">
+            <label for="cargo">Cargo</label>
+            <input type="text" id="cargo" name="cargo" placeholder="CEO, CTO, COO…">
+          </div>
+          <div class="form-group">
+            <label for="organizacion">Organización</label>
+            <input type="text" id="organizacion" name="organizacion" placeholder="Nombre de tu empresa">
+          </div>
+          <div class="form-group">
+            <label for="email">Email corporativo</label>
+            <input type="email" id="email" name="email" placeholder="tu@empresa.com">
+          </div>
+          <div class="form-group form-full">
+            <label for="como-llegaste">¿Cómo llegaste al Assessment?</label>
+            <select id="como-llegaste" name="como-llegaste">
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option value="art">Completé el AI Return Test</option>
+              <option value="novela">Leí la Novela ReturnAI</option>
+              <option value="linkedin">LinkedIn / Redes sociales</option>
+              <option value="referido">Me lo recomendó un colega</option>
+              <option value="busqueda">Búsqueda en Google</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-submit-wrap">
+          <button type="submit" class="btn-gold full">Agendar mi sesión de análisis de resultados</button>
+        </div>
+      </div>
+
+      <div class="cta-wrap centered">
+        <span class="cta-support on-dark">30 minutos con un especialista en rentabilización de la IA · Sin costo · Sin compromiso de contratar</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOQUE 8 · CREDIBILIDAD DEL EJECUTOR (César Lozano)
+════════════════════════════════════════════════════════ -->
+<section id="credibilidad" class="section-pad">
+  <div class="container">
+
+    <div class="credibilidad-grid">
+
+      <div class="credibilidad-photo">
+        <div class="credibilidad-photo-placeholder">
+          <span class="credibilidad-photo-initials">CL</span>
+        </div>
+      </div>
+
+      <div class="credibilidad-copy">
+        <span class="section-label">Quién facilita el Assessment</span>
+        <h2>Quién facilita tu AI Return Assessment: César Lozano, autor del Modelo ARIA y de las 14 herramientas propietarias que estructuran los 6 sprints.</h2>
+        <p>César Lozano dirige Digital Change Advisors. Ha acompañado a más de 70 organizaciones en 17 países en la documentación del retorno sobre sus inversiones en IA. El Assessment lo facilita personalmente — no a través de consultores júnior con un script, sino con el autor del método que va a diagnosticar a tu equipo.</p>
+
+        <ul class="credenciales-list">
+          <li>
+            <span class="cred-dot"></span>
+            Autor del Modelo ARIA: 3 instrumentos de diagnóstico conductual + 7 frameworks ágiles + 4 herramientas de gestión — 14 herramientas propietarias en total
+          </li>
+          <li>
+            <span class="cred-dot"></span>
+            70+ organizaciones acompañadas en América Latina, Estados Unidos y Europa
+          </li>
+          <li>
+            <span class="cred-dot"></span>
+            247+ profesionales formados en la Comunidad LADA · 17 países
+          </li>
+          <li>
+            <span class="cred-dot"></span>
+            Autor de la Novela ReturnAI — el marco metodológico del Assessment en formato de lectura ejecutiva
+          </li>
+          <li>
+            <span class="cred-dot"></span>
+            Adopción superior al 70% y ROI documentado en 120 días en las organizaciones donde la Solución ReturnAI fue aplicada después del diagnóstico
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOQUE 9 · REFUERZO / LOSS AVERSION + SEGUNDO CTA
+     Fondo: teal-subtle. Botón teal (NO dorado — B7 exclusivo).
+     CTA idéntico al B7 en texto.
+════════════════════════════════════════════════════════ -->
+<section id="refuerzo" class="section-pad">
+  <div class="container">
+    <div class="refuerzo-inner">
+      <span class="section-label">El costo de la inacción</span>
+      <h2>Cada trimestre sin diagnóstico es otro trimestre donde tu inversión en IA pierde captura de valor sin que sepas exactamente dónde.</h2>
+      <p>Una organización con $300,000 anuales en IA y adopción al 30% pierde captura de valor todos los meses. El Assessment de $5,000 produce el diagnóstico en 3 a 4 semanas — y un plan de 90 días para revertirlo. La conversación previa de 30 minutos cuesta solo tu tiempo.</p>
+
+      <div class="cta-wrap centered">
+        <a href="#cta-principal" class="btn-primary">Agendar mi sesión de análisis de resultados</a>
+        <span class="cta-support">30 minutos con un especialista en rentabilización de la IA · Sin costo · Sin compromiso de contratar</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOQUE 10 · CONECTORES DESCENDENTES
+     Novela ReturnAI + AI Return Test
+     Botones outline. Min-height 48px (corrección C5).
+════════════════════════════════════════════════════════ -->
+<section id="conectores" class="section-pad">
+  <div class="container">
+
+    <div class="conectores-header">
+      <span class="section-label">¿Todavía no estás listo?</span>
+      <h2>Dos puntos de entrada anteriores al Assessment</h2>
+      <p>Si el Assessment no es el paso correcto para este momento, aquí tienes los dos recursos previos de la escalera de valor ReturnAI.</p>
+    </div>
+
+    <div class="conectores-grid">
+
+      <!-- Conector hacia la Novela ReturnAI -->
+      <div class="conector-card">
+        <span class="conector-sublabel">Novela ReturnAI · $19.97 ebook · $29.97 impreso</span>
+        <h3>El marco metodológico del Assessment, en formato de lectura ejecutiva</h3>
+        <p>El marco metodológico del Assessment en formato de lectura ejecutiva. Quien llega al Assessment habiendo leído la Novela ReturnAI profundiza más rápido y extrae mayor valor de la sesión presencial.</p>
+        <a href="#" class="btn-outline" style="min-height:48px;margin-top:8px;">Conocer la Novela ReturnAI</a>
+      </div>
+
+      <!-- Conector hacia el AI Return Test -->
+      <div class="conector-card">
+        <span class="conector-sublabel">AI Return Test · Gratuito · 30 min</span>
+        <h3>Diagnóstico autoaplicado de los 10 obstáculos de tu organización</h3>
+        <p>Diagnóstico autoaplicado de los 10 obstáculos presentes en tu organización. Llegar al Assessment con este mapa previo enfoca la llamada y precisa el plan de intervención.</p>
+        <a href="#" class="btn-outline" style="min-height:48px;margin-top:8px;">Completar el AI Return Test</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOQUE 11 · TAGLINE INSTITUCIONAL
+     Marcellus. Desktop: 28-32px. Móvil: 22-24px (especificado).
+     Espaciado antes del footer: mínimo 48px.
+════════════════════════════════════════════════════════ -->
+<section id="tagline">
+  <div class="container">
+    <div class="tagline-inner">
+      <p class="tagline-text">Donde la adopción tecnológica encuentra el KPI que importa.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+     Footer estructural — excepción brand book DCA 2026
+     al límite de 1 bloque carbón de contenido
+════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">Digital Change Advisors</div>
+      <div class="footer-divider"></div>
+      <p class="footer-tagline-sub">Consultoría boutique en arquitectura de adopción de IA · 70+ organizaciones · 17 países</p>
+      <p class="footer-copy">© 2026 Digital Change Advisors LLC · Todos los derechos reservados · Modelo ARIA es marca registrada de Digital Change Advisors</p>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>
