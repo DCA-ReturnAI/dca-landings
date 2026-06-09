@@ -2395,5 +2395,20 @@ section {
 
 </footer>
 
+<script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    if (!params.toString()) return;
+    var tallyLinks = document.querySelectorAll('a[href*="tally.so"]');
+    tallyLinks.forEach(function(link) {
+      var url = new URL(link.href);
+      params.forEach(function(value, key) {
+        url.searchParams.set(key, value);
+      });
+      link.href = url.toString();
+    });
+  })();
+</script>
+
 </body>
 </html>
