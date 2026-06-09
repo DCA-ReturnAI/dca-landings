@@ -27,10 +27,7 @@ Toda landing page de DCA debe tener exactamente **3 CTAs** que apunten a la mism
 
 **Anti-patrón detectado (2026-06-09):** Header y hero con `href="#iniciar"` — esto hace scroll hasta el bloque CTA en lugar de llevar al test directamente. Visitante con intención alta tiene que bajar hasta el final de la página para acceder al test. Se corrigió en ART landing.
 
-**URL placeholder:** Mientras no esté disponible la URL real del instrumento, usar `href="#"` con comentario HTML:
-```html
-<!-- URL del AI Return Test: reemplazar # por la URL real cuando esté disponible -->
-```
+**URL canónica del AI Return Test:** `https://tally.so/r/Np6e5W` — Tally form, `target="_blank" rel="noopener"` en todos los CTAs.
 
 **Rationale BE:** El visitante C-Level que llega desde LinkedIn o referido ya está en etapa de acción — no necesita leer 10 bloques para hacer clic. El visitor de intención media scrollea de todas formas y llega al bloque CTA final. Los 3 CTAs capturan ambos arquetipos sin fricción.
 
