@@ -166,12 +166,63 @@ Footer:
 - Fotografías de testimoniales: `border-radius: 8px` (nunca circulares)
 - Stack vertical en móvil (nunca carruseles)
 - Formulario: máximo 5 campos
+- **⚠️ OBLIGATORIO — Script de propagación UTM (antes del `</body>`):** Ver sección siguiente.
+
+## Script Canónico de Propagación UTM — OBLIGATORIO en toda landing
+
+**Regla:** Toda landing que contenga enlaces a Tally (o cualquier formulario externo) **debe incluir este script como último elemento antes del `</body>`**. Sin él, los parámetros UTM que llegan desde LinkedIn u otras fuentes se pierden y no se registran en las respuestas del formulario.
+
+```html
+<script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    if (!params.toString()) return;
+    var tallyLinks = document.querySelectorAll('a[href*="tally.so"]');
+    tallyLinks.forEach(function(link) {
+      var url = new URL(link.href);
+      params.forEach(function(value, key) {
+        url.searchParams.set(key, value);
+      });
+      link.href = url.toString();
+    });
+  })();
+</script>
+```
+
+**Selector:** `a[href*="tally.so"]` — captura todos los enlaces a Tally sin depender de IDs ni clases. Si en el futuro se usa otro formulario (Typeform, etc.), cambiar el selector para apuntar a ese dominio.
+
+**Comportamiento:**
+- Sin UTMs en la URL de la landing → `return` inmediato, sin tocar ningún enlace.
+- Con UTMs → se propagan a todos los CTAs de Tally antes de que el usuario haga clic.
+- Parámetros existentes en la URL del botón se preservan; los de la landing los sobrescriben con `set()`.
+- Ningún otro enlace de la página es afectado.
+
+**Estructura UTM recomendada por landing:**
+
+| Landing | `utm_source` | `utm_medium` | `utm_campaign` |
+|---------|-------------|-------------|----------------|
+| ART (ai-return-test) | `art-landing` | `header-cta` / `hero-cta` / `final-cta` | `returnai-[mes]` |
+| ARA Barco Sin Timón | `ara-barco` | idem | idem |
+| ARA Feudos Digitales | `ara-feudos` | idem | idem |
+| (cada arquetipo) | `ara-[slug]` | idem | idem |
+
+**Verificación al crear una landing nueva:**
+1. Buscar `tally.so` en el HTML — confirmar que todos los enlaces están presentes.
+2. Confirmar que el script está justo antes de `</body>` (última línea del body).
+3. Prueba manual: cargar la landing con `?utm_source=test&utm_medium=prueba` y hacer hover sobre un botón CTA — la URL del `href` debe mostrar los parámetros inyectados.
 
 ## Repositorio de Despliegue
 
 - **Dev (monorepo):** `DCA-ReturnAI/dca-presencia-digital-dev` — carpeta `landings/`
-- **Producción:** `DCA-ReturnAI/dca-landings` (por crear cuando haya landings listas)
-- **Deploy landings:** `git subtree push --prefix=landings production-landings main`
+- **Producción:** `DCA-ReturnAI/dca-landings` — GitHub Pages activo: `https://dca-returnai.github.io/dca-landings/`
+- **Deploy canónico** (ejecutar desde `Presencia Digital DCA/`):
+  ```bash
+  git subtree split --prefix=landings -b deploy-tmp-landings && \
+  GIT_ASKPASS=/tmp/git_askpass.sh GIT_TERMINAL_PROMPT=0 \
+  git -c credential.helper= push production-landings deploy-tmp-landings:main --force && \
+  git branch -D deploy-tmp-landings
+  ```
+- ⚠️ NUNCA usar `git push production-landings main` directo — sube el directorio padre completo y rompe GitHub Pages.
 
 ## Estado del Proyecto
 
@@ -186,12 +237,15 @@ Footer:
 - ⏳ QA visual en navegador — iniciar con `ara/barco-sin-timon/`
 - ⏳ Iteración Novela ReturnAI (si aplica)
 
-### Fine-tuning ART — En curso (2026-06-08)
+### Fine-tuning ART — CERRADO DEFINITIVO (2026-06-09)
 - ✅ Repo `dca-landings` creado y remote `production-landings` configurado
-- ✅ Header/Footer corregidos: logo v2.2 canónico integrado, eslogan "De la inversión en IA al retorno que importa."
-- ✅ Auditoría completa UX + BE ejecutada (ambas skills) sección a sección
-- ✅ Hallazgos documentados en memoria: `project_art_landing_audit.md`
-- ⏳ Implementación de los 10 bloques (ver orden canónico abajo)
+- ✅ Header/Footer corregidos: logo v2.2 canónico integrado
+- ✅ Auditoría completa UX + BE ejecutada (ambas skills) — hallazgos en `project_art_landing_audit.md`
+- ✅ Restructura de 8 → 10 bloques implementada (B6, B8, B9 nuevos; B8 Reactivación eliminado)
+- ✅ 3 CTAs con arquitectura canónica: header + hero + B10, todos directamente a Tally URL
+- ✅ Script UTM propagation integrado (justo antes de `</body>`, línea 2399)
+- ✅ Todos los términos prohibidos corregidos (LADA→LARIA, 247+→250+, adopción como fin)
+- ✅ Desplegado en producción: `https://dca-returnai.github.io/dca-landings/ai-return-test-landing.html`
 
 ---
 
