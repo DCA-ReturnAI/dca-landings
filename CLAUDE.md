@@ -189,7 +189,10 @@ Footer:
 </script>
 ```
 
-**Selector:** `a[href*="tally.so"]` — captura todos los enlaces a Tally sin depender de IDs ni clases. Si en el futuro se usa otro formulario (Typeform, etc.), cambiar el selector para apuntar a ese dominio.
+**Selector por tipo de landing:**
+- **ART / Novela** → `a[href*="tally.so"]` (CTAs apuntan a Tally)
+- **ARA** → `a[href*="tidycal.com"]` (CTAs apuntan a TidyCal)
+Cambiar el selector en el script según el destino del formulario de conversión de la landing.
 
 **Comportamiento:**
 - Sin UTMs en la URL de la landing → `return` inmediato, sin tocar ningún enlace.
@@ -233,8 +236,21 @@ Footer:
 - ✅ Fase 4 — Auditoría y validación de consistencia (sin hallazgos bloqueantes)
 - ✅ Fase 5 — Integración al monorepo `dca-presencia-digital-dev`
 
+### QA + Fine-tuning ARA — CERRADO DEFINITIVO (2026-06-09)
+- ✅ 8 archivos ARA auditados y corregidos (v0 template + 7 arquetipos)
+- ✅ CTAs (3 por landing) → TidyCal directo; eliminado anti-patrón `href="#cta-principal"`
+- ✅ B7: formulario HTML removido en todos; reemplazado por `btn-gold` → TidyCal
+- ✅ CSS token `--dca-platinum` corregido: `#dfe3e1` → `#f3f3f3` (Platino Tech canónico)
+- ✅ H1 pirámide invertida implementada en todos (`<span class="line">`, L1 ≥ L2 ≥ L3)
+- ✅ `scroll-padding-top: 72px` en `html` en todos (nav sticky no tapa anclas)
+- ✅ B8 credencial: "LADA" → "LARIA", "247+" → "250+"
+- ✅ Gradientes eliminados en `testimonial-photo-placeholder`
+- ✅ Voz de marca: "su organización" → "tu organización" en todo el copy
+- ✅ B10 rutas relativas corregidas (`../novela-returnai-landing.html` desde v0; `../../` desde arquetipos)
+- ✅ UTM script de propagación integrado en todos (selector `a[href*="tidycal.com"]`)
+- ✅ Desplegado en producción: `https://dca-returnai.github.io/dca-landings/ara/`
+
 ### Pendiente
-- ⏳ QA visual en navegador — iniciar con `ara/barco-sin-timon/`
 - ⏳ Iteración Novela ReturnAI (si aplica)
 
 ### Fine-tuning ART — CERRADO DEFINITIVO (2026-06-09)
