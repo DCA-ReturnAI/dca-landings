@@ -52,7 +52,7 @@ ARCHETYPES = [
 ]
 
 # IDs de secciones únicas por arquetipo — se preservan intactos
-UNIQUE_SECTIONS = ['hero', 'para-quien', 'anclaje', 'refuerzo']
+UNIQUE_SECTIONS = ['hero', 'arquetipo-contexto', 'hero-context', 'para-quien', 'anclaje', 'refuerzo']
 
 
 def extract_section(html, section_id):
