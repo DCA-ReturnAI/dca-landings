@@ -17,7 +17,7 @@
   --dca-carbon:       #1e2a38;
   --dca-white:        #ffffff;
   --dca-terracotta:   #c2593f;
-  --dca-platinum:     #dfe3e1;
+  --dca-platinum:     #f3f3f3;
   --dca-teal-subtle:  rgba(46,139,118,0.05);
   --font-display:     'Marcellus', Georgia, serif;
   --font-body:        'Montserrat', 'Helvetica Neue', sans-serif;
@@ -28,7 +28,7 @@
 
 /* ─── RESET & BASE ──────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body {
   font-family: var(--font-body);
   font-size: 17px;
@@ -57,6 +57,7 @@ h1, h2 {
   line-height: 1.3;
 }
 h1 { font-size: clamp(28px, 4vw, 48px); }
+h1 .line { display: block; }
 h2 { font-size: clamp(24px, 3vw, 36px); }
 h3 {
   font-family: var(--font-body);
@@ -379,7 +380,7 @@ header {
 .testimonial-photo-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--dca-platinum) 0%, #c8ceca 100%);
+  background: var(--dca-platinum);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1033,7 +1034,7 @@ footer {
 <header>
   <div class="header-inner">
     <div class="logo">Digital Change <span>Advisors</span></div>
-    <a href="#cta-principal" class="header-cta">Agendar sesión de análisis</a>
+    <a href="https://tidycal.com/pwgdigital/returnai" target="_blank" rel="noopener" class="header-cta">Agendar sesión de análisis</a>
   </div>
 </header>
 
@@ -1052,7 +1053,7 @@ footer {
         <p class="hero-body">Si completó el AI Return Test, ya conoce el diagnóstico: el bloqueo no es cognitivo, es emocional. El AI Return Assessment mide con hasta 20 líderes los 10 obstáculos humanos al retorno —con foco quirúrgico en creencias limitantes, síndrome del impostor digital y miedo al desplazamiento— y entrega un plan 30-60-90 que reemplaza pasividad organizacional con experimentación activa documentada. No es capacitación adicional. Es resignificación del rol del colaborador frente a la IA.</p>
 
         <div class="cta-wrap">
-          <a href="#cta-principal" class="btn-primary" style="display:inline-block;width:auto;">Agendar mi sesión de análisis</a>
+          <a href="https://tidycal.com/pwgdigital/returnai" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block;width:auto;">Agendar mi sesión de análisis</a>
           <span class="cta-support">30 minutos · Sin costo · Sin compromiso de avanzar</span>
         </div>
       </div>
@@ -1382,43 +1383,8 @@ footer {
       <h2>Agende una sesión de análisis con DCA. Si el Síndrome del Paralítico no aplica a su organización, lo decimos en 30 minutos.</h2>
       <p class="cta-principal-copy">Una llamada de 30 minutos con un consultor senior de DCA. Si confirmamos que el patrón Síndrome del Paralítico es el suyo, le presentamos cronograma, alcance y propuesta formal del Assessment. Si no, le indicamos cuál es la intervención apropiada —puede ser este Assessment, otro instrumento del Modelo ARIA, o una recomendación distinta. No hay obligación de avanzar, y no es una sesión de capacitación encubierta.</p>
 
-      <div class="cta-form">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
-          </div>
-          <div class="form-group">
-            <label for="cargo">Cargo</label>
-            <input type="text" id="cargo" name="cargo" placeholder="CEO, CTO, COO…">
-          </div>
-          <div class="form-group">
-            <label for="organizacion">Organización</label>
-            <input type="text" id="organizacion" name="organizacion" placeholder="Nombre de tu empresa">
-          </div>
-          <div class="form-group">
-            <label for="email">Email corporativo</label>
-            <input type="email" id="email" name="email" placeholder="tu@empresa.com">
-          </div>
-          <div class="form-group form-full">
-            <label for="como-llegaste">¿Cómo llegaste al Assessment?</label>
-            <select id="como-llegaste" name="como-llegaste">
-              <option value="" disabled selected>Selecciona una opción</option>
-              <option value="art">Completé el AI Return Test</option>
-              <option value="novela">Leí la Novela ReturnAI</option>
-              <option value="linkedin">LinkedIn / Redes sociales</option>
-              <option value="referido">Me lo recomendó un colega</option>
-              <option value="busqueda">Búsqueda en Google</option>
-              <option value="otro">Otro</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-submit-wrap">
-          <button type="submit" class="btn-gold full">Agendar mi sesión de análisis de resultados</button>
-        </div>
-      </div>
-
       <div class="cta-wrap centered">
+        <a href="https://tidycal.com/pwgdigital/returnai" target="_blank" rel="noopener" class="btn-gold">Agendar mi sesión de análisis de resultados</a>
         <span class="cta-support on-dark">30 minutos con un especialista en rentabilización de la IA · Sin costo · Sin compromiso de contratar</span>
       </div>
 
@@ -1458,7 +1424,7 @@ footer {
           </li>
           <li>
             <span class="cred-dot"></span>
-            247+ profesionales formados en la Comunidad LADA · 17 países
+            250+ líderes en la Comunidad LARIA · 17 países
           </li>
           <li>
             <span class="cred-dot"></span>
@@ -1489,7 +1455,7 @@ footer {
       <p>El reporte del AI Return Test documenta que las creencias limitantes no son explícitas (nadie dice "no puedo aprender") sino que operan como filtros inconscientes que sabotean cada nueva iniciativa. Sin intervención, la narrativa colectiva se convierte en "intentamos adoptar IA pero no funcionó para nosotros" —cuando en realidad nunca se intentó genuinamente porque el bloqueo psicológico nunca fue abordado.</p>
 
       <div class="cta-wrap centered">
-        <a href="#cta-principal" class="btn-primary">Agendar mi sesión de análisis de resultados</a>
+        <a href="https://tidycal.com/pwgdigital/returnai" target="_blank" rel="noopener" class="btn-primary">Agendar mi sesión de análisis de resultados</a>
         <span class="cta-support">30 minutos con un especialista en rentabilización de la IA · Sin costo · Sin compromiso de contratar</span>
       </div>
     </div>
@@ -1518,7 +1484,7 @@ footer {
         <span class="conector-sublabel">Novela ReturnAI · $19.97 ebook · $29.97 impreso</span>
         <h3>El marco metodológico del Assessment, en formato de lectura ejecutiva</h3>
         <p>El marco metodológico del Assessment en formato de lectura ejecutiva. Quien llega al Assessment habiendo leído la Novela ReturnAI profundiza más rápido y extrae mayor valor de la sesión presencial.</p>
-        <a href="#" class="btn-outline" style="min-height:48px;margin-top:8px;">Conocer la Novela ReturnAI</a>
+        <a href="../../novela-returnai-landing.html" class="btn-outline" style="min-height:48px;margin-top:8px;">Conocer la Novela ReturnAI</a>
       </div>
 
       <!-- Conector hacia el AI Return Test -->
@@ -1526,7 +1492,7 @@ footer {
         <span class="conector-sublabel">AI Return Test · Gratuito · 30 min</span>
         <h3>Diagnóstico autoaplicado de los 10 obstáculos de tu organización</h3>
         <p>Diagnóstico autoaplicado de los 10 obstáculos presentes en tu organización. Llegar al Assessment con este mapa previo enfoca la llamada y precisa el plan de intervención.</p>
-        <a href="#" class="btn-outline" style="min-height:48px;margin-top:8px;">Completar el AI Return Test</a>
+        <a href="https://tally.so/r/Np6e5W" target="_blank" rel="noopener" class="btn-outline" style="min-height:48px;margin-top:8px;">Completar el AI Return Test</a>
       </div>
 
     </div>
@@ -1558,12 +1524,27 @@ footer {
     <div class="footer-inner">
       <div class="footer-logo">Digital Change Advisors</div>
       <div class="footer-divider"></div>
-      <p class="footer-tagline-sub">Consultoría boutique en arquitectura de adopción de IA · 70+ organizaciones · 17 países</p>
+      <p class="footer-tagline-sub">Arquitectura de rentabilización de la IA · 70+ organizaciones · Comunidad LARIA en 17 países</p>
       <p class="footer-copy">© 2026 Digital Change Advisors LLC · Todos los derechos reservados · Modelo ARIA es marca registrada de Digital Change Advisors · <a href="https://dca-returnai.github.io/dca-website/privacy-policy.html" style="color:rgba(255,255,255,0.45);text-decoration:none;" target="_blank" rel="noopener">Política de privacidad</a> · <a href="https://dca-returnai.github.io/dca-website/terms-of-use.html" style="color:rgba(255,255,255,0.45);text-decoration:none;" target="_blank" rel="noopener">Términos de uso</a></p>
     </div>
   </div>
 </footer>
 
 
+
+<script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    if (!params.toString()) return;
+    var links = document.querySelectorAll('a[href*="tidycal.com"]');
+    links.forEach(function(link) {
+      var url = new URL(link.href);
+      params.forEach(function(value, key) {
+        url.searchParams.set(key, value);
+      });
+      link.href = url.toString();
+    });
+  })();
+</script>
 </body>
 </html>
