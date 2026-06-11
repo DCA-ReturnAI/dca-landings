@@ -916,7 +916,8 @@ header {
   border-left: 4px solid var(--dca-gold);
 }
 .conector-card--secondary {
-  background: var(--dca-platinum);
+  background: #e8e8e8;
+  border-left: 4px solid rgba(30,42,56,0.25);
 }
 .conector-sublabel {
   font-family: var(--font-body);
