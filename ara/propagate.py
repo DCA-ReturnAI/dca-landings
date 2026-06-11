@@ -193,6 +193,24 @@ def main():
         html = html.replace(
             'class="btn-gold">Agendar mi sesión de diagnóstico<',
             f'class="btn-gold">{MIRROR_CTA}<')
+
+        # B10 Conectores — variante de espejo (2026-06-11, Opción 1 aprobada).
+        # El visitante cálido ya completó el ART: la tarjeta primaria lo invita
+        # a sumar las lecturas de su equipo directivo, no a repetir el test.
+        B10_MIRROR = [
+            ('Llega al Assessment con el diagnóstico ya hecho.',
+             'Llega al Assessment con más perspectivas.'),
+            ('AI Return Test · Gratuito · 25 min',
+             'AI Return Test · Tu equipo directivo · 25 min'),
+            ('El mapa de los 10 obstáculos en tu empresa, antes de la sesión de diagnóstico',
+             'Cada par del C-Level que toma el test suma una perspectiva al diagnóstico'),
+            ('Cuando llegas al Assessment con este mapa ya completado, la llamada se enfoca y la ruta de captura de valor queda definida desde el primer minuto.',
+             'Tu lectura individual ya está hecha. Cuando los líderes de tu equipo llegan a la sesión con su propio resultado, la conversación parte de varias lecturas, no de una sola.'),
+            ('>Iniciar el diagnóstico previo<',
+             '>Compartir el test con mi equipo<'),
+        ]
+        for old, new in B10_MIRROR:
+            html = html.replace(old, new)
         # proceso-aria-link: inline text link en B4 sigue el mismo frame de visitante
         html = html.replace(
             '>Agenda tu sesión de diagnóstico →<',
