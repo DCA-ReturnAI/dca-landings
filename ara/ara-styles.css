@@ -416,7 +416,7 @@ header {
   max-width: var(--text-max-width);
   margin: 0 auto 56px;
 }
-.proceso-header h2 { margin-bottom: 16px; }
+.proceso-header h2 { margin-bottom: 16px; font-size: clamp(18px, 2vw, 22px); }
 .proceso-header p {
   font-size: 16px;
   color: rgba(30,42,56,0.75);
