@@ -283,6 +283,7 @@ header {
   margin-bottom: 20px;
   color: var(--dca-carbon);
 }
+.entregables-intro h2 .line { display: block; }
 .entregables-intro p {
   font-size: 16px;
   color: rgba(30,42,56,0.75);
