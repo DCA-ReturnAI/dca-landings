@@ -697,7 +697,7 @@ header {
 }
 .cta-principal-inner {
   text-align: center;
-  max-width: 680px;
+  max-width: 840px;
   margin: 0 auto;
 }
 .cta-section-label {
@@ -712,10 +712,11 @@ header {
 }
 .cta-principal-inner h2 {
   font-family: var(--font-display);
-  font-size: clamp(24px, 3vw, 36px);
+  font-size: clamp(20px, 2.2vw, 28px);
   color: var(--dca-white);
   margin-bottom: 20px;
 }
+.cta-principal-inner h2 .line { display: block; }
 .cta-principal-copy {
   font-family: var(--font-body);
   font-weight: 400;
