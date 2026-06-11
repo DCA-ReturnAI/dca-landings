@@ -502,6 +502,23 @@ header {
   color: rgba(30,42,56,0.8);
   line-height: 1.65;
 }
+.proceso-aria-link {
+  margin-top: 16px;
+  text-align: center;
+}
+.proceso-aria-link a {
+  color: var(--dca-teal);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--dca-teal);
+  transition: color 200ms ease, border-color 200ms ease;
+}
+.proceso-aria-link a:hover {
+  color: #1f6657;
+  border-color: #1f6657;
+}
 
 /* ─── B4 ANIMACIÓN SECUENCIAL DE PASOS ──────────────────── */
 .js-ready .proceso-timeline::before {
