@@ -505,18 +505,18 @@ header {
 .js-ready .proceso-timeline::before {
   transform-origin: left center;
   transform: scaleX(0);
-  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
+  transition: transform 2.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
 }
 .js-ready .proceso-timeline.in::before { transform: scaleX(1); }
 .js-ready .proceso-step {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 1.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .js-ready .proceso-step .step-circle {
   transform: scale(0.72);
-  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 1.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .js-ready .proceso-timeline.in .proceso-step              { opacity: 1; transform: none; }
 .js-ready .proceso-timeline.in .proceso-step:nth-child(1) { transition-delay: 0.12s; }
