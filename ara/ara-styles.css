@@ -190,7 +190,8 @@ header {
   transition: all 0.2s;
 }
 .header-cta:hover {
-  background: var(--dca-teal);
+  /* No usar shorthand background: aquí — resetea el background-image
+     del fill C3 (línea ~1322) y deja texto blanco sobre fondo blanco */
   color: var(--dca-white);
 }
 
