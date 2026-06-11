@@ -563,10 +563,10 @@ header {
   border: 1px solid var(--dca-platinum);
 }
 .para-quien-col.yes {
-  border-left: 4px solid var(--dca-teal);
+  border-left: 4px solid var(--dca-gold);
 }
 .para-quien-col.no {
-  border-left: 4px solid var(--dca-platinum);
+  border-left: 4px solid var(--dca-teal);
 }
 .para-quien-col-title {
   font-family: var(--font-body);
