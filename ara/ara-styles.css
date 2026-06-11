@@ -876,17 +876,23 @@ header {
 
 /* ─── BLOQUE 10 · CONECTORES ─────────────────────────────── */
 #conectores {
-  background: var(--dca-white);
+  background: var(--dca-teal);
+}
+#conectores .section-label {
+  color: rgba(255,255,255,0.55);
 }
 .conectores-header {
   text-align: center;
   max-width: 480px;
   margin: 0 auto 48px;
 }
-.conectores-header h2 { margin-bottom: 12px; }
+.conectores-header h2 {
+  color: var(--dca-white);
+  margin-bottom: 12px;
+}
 .conectores-header p {
   font-size: 15px;
-  color: rgba(30,42,56,0.6);
+  color: rgba(255,255,255,0.72);
 }
 .conectores-grid {
   display: grid;
@@ -894,7 +900,8 @@ header {
   gap: 24px;
 }
 .conector-card {
-  border: 1px solid var(--dca-platinum);
+  background: var(--dca-white);
+  border: 1px solid transparent;
   border-radius: 8px;
   padding: 32px 28px;
   display: flex;
