@@ -1281,6 +1281,53 @@ section { padding: 48px 0; }
   .preludio-panel__inner { padding: 0 24px 48px; }
 }
 
+/* ─── MOTION SYSTEM B1–B4 ───────────────────────────────────────────────── */
+@keyframes dca-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes dca-cover-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* B1 — Hero: dispara al cargar, sin scroll */
+.hero-eyebrow   { opacity:0; animation: dca-fade-up 0.55s cubic-bezier(0.16,1,0.3,1)  60ms both; }
+.novela-h1      { opacity:0; animation: dca-fade-up 0.70s cubic-bezier(0.16,1,0.3,1) 160ms both; }
+.hero-chapeau   { opacity:0; animation: dca-fade-up 0.70s cubic-bezier(0.16,1,0.3,1) 300ms both; }
+.hero-cta-group { opacity:0; animation: dca-fade-up 0.65s cubic-bezier(0.16,1,0.3,1) 430ms both; }
+.novela-cover-wrap { opacity:0; animation: dca-cover-in 0.90s cubic-bezier(0.16,1,0.3,1) 190ms both; }
+
+/* Scroll-reveal: clase base — JS agrega .sr-in al entrar al viewport */
+.sr {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity  0.65s cubic-bezier(0.16,1,0.3,1),
+    transform 0.65s cubic-bezier(0.16,1,0.3,1);
+}
+.sr.sr-in { opacity: 1; transform: translateY(0); }
+
+/* B4 — card hover (spring) — anula .sr cuando .sr-in ya fue aplicado */
+.revela-card.sr-in:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(30,42,56,0.09);
+  transition:
+    transform  0.30s cubic-bezier(0.34,1.56,0.64,1),
+    box-shadow 0.30s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* Reduced motion: todo queda visible e inmóvil */
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow, .novela-h1, .hero-chapeau,
+  .hero-cta-group, .novela-cover-wrap {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  .sr { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .revela-card.sr-in:hover { transform: none !important; box-shadow: none !important; }
+}
+
 </style>
 </head>
 
@@ -1362,11 +1409,11 @@ section { padding: 48px 0; }
   <div class="espejo-inner">
 
     <div class="espejo-visual">
-      <div class="caso-card">
+      <div class="caso-card sr">
         <p class="caso-card-label">El caso documentado en la novela</p>
         <div class="caso-stat-row">
 
-          <div class="caso-stat">
+          <div class="caso-stat sr">
             <span class="caso-stat-num">$8.2M</span>
             <div class="caso-stat-desc">
               <strong>Inversión en IA sin retorno</strong>
@@ -1374,7 +1421,7 @@ section { padding: 48px 0; }
             </div>
           </div>
 
-          <div class="caso-stat">
+          <div class="caso-stat sr">
             <span class="caso-stat-num">120</span>
             <div class="caso-stat-desc">
               <strong>Días de intervención</strong>
@@ -1382,7 +1429,7 @@ section { padding: 48px 0; }
             </div>
           </div>
 
-          <div class="caso-stat">
+          <div class="caso-stat sr">
             <span class="caso-stat-num caso-stat-num--sm">11%→70%</span>
             <div class="caso-stat-desc">
               <strong>Tasa de adopción real</strong>
@@ -1390,7 +1437,7 @@ section { padding: 48px 0; }
             </div>
           </div>
 
-          <div class="caso-stat">
+          <div class="caso-stat sr">
             <span class="caso-stat-num">$891K</span>
             <div class="caso-stat-desc">
               <strong>En el P&amp;L al cierre</strong>
@@ -1403,7 +1450,7 @@ section { padding: 48px 0; }
       </div>
     </div>
 
-    <div class="espejo-content">
+    <div class="espejo-content sr">
       <p class="section-label">Por qué esta historia importa</p>
       <h2>Adalid no es un personaje de manual. Es el directivo que toma exactamente las mismas decisiones que tú — con una diferencia: en esta historia, la secuencia que desbloqueó el retorno está documentada paso a paso.</h2>
 
@@ -1413,7 +1460,7 @@ section { padding: 48px 0; }
         <p>Si llevas más de 12 meses con una inversión en IA sin poder documentar retorno ante tu Junta, la novela no te da una fórmula — te da la secuencia exacta de diagnóstico e intervención que Adalid aplicó: los 10 obstáculos que bloqueaban su P&amp;L, en el orden en que deben intervenirse.</p>
       </div>
 
-      <div class="espejo-pull">
+      <div class="espejo-pull sr">
         "No fue un problema de tecnología. Fue un problema de diez obstáculos humanos y organizacionales que ningún vendor diagnostica — y que el Modelo ARIA interviene en el orden exacto."
         <footer class="pull-attribution">— César Lozano, CEO · Digital Change Advisors</footer>
       </div>
@@ -1430,7 +1477,7 @@ section { padding: 48px 0; }
 <section class="block-preludio">
   <div class="preludio-inner">
 
-    <div class="preludio-content">
+    <div class="preludio-content sr">
       <p class="section-label">Primer capítulo</p>
       <h2>Lee el primer capítulo antes de comprar. Sin formulario, sin correo.</h2>
       <p class="preludio-body">En cuarenta y siete minutos de reunión, el CEO de Adalid documentó en voz alta lo que dieciocho meses de implementación no habían producido. Lo que Adalid no supo responder en esa sala es la misma pregunta que aparece en toda revisión de Junta donde se evalúa el retorno de la IA.</p>
@@ -1440,7 +1487,7 @@ section { padding: 48px 0; }
       </button>
     </div>
 
-    <div class="preludio-fragment" aria-hidden="true">
+    <div class="preludio-fragment sr" aria-hidden="true">
       <div class="preludio-fragment-text">
         <p style="margin:0 0 10px;font-style:inherit;">"Tienes ciento veinte días".</p>
         <p style="margin:0 0 10px;font-style:inherit;">La reunión de esa mañana había durado cuarenta y siete minutos. Pero sus palabras lo perseguirían durante los próximos cuatro meses.</p>
@@ -1461,7 +1508,7 @@ section { padding: 48px 0; }
 <section class="block-revela">
   <div class="revela-inner">
 
-    <div class="revela-intro">
+    <div class="revela-intro sr">
       <p class="section-label">La tesis de la novela</p>
       <h2>Cuatro preguntas que el libro responde desde adentro del caso</h2>
       <div class="section-accent"></div>
@@ -1470,25 +1517,25 @@ section { padding: 48px 0; }
 
     <div class="revela-grid">
 
-      <div class="revela-card">
+      <div class="revela-card sr">
         <div class="revela-num">01</div>
         <p class="revela-question">¿Por qué el piloto funciona y el P&amp;L no lo refleja?</p>
         <p class="revela-desc">Adalid tenía métricas de uso impecables. Los obstáculos que bloqueaban el retorno no estaban donde su equipo de TI los buscaba — y en la novela los verás antes de que él mismo sepa nombrarlos.</p>
       </div>
 
-      <div class="revela-card">
+      <div class="revela-card sr">
         <div class="revela-num">02</div>
         <p class="revela-question">¿Cuáles de los 10 obstáculos estaban activos en tu empresa?</p>
         <p class="revela-desc">El Modelo ARIA identifica 10 obstáculos humanos y organizacionales. La novela muestra cuáles estaban presentes en la gestora y con qué intensidad.</p>
       </div>
 
-      <div class="revela-card">
+      <div class="revela-card sr">
         <div class="revela-num">03</div>
         <p class="revela-question">¿Cómo se ve un diagnóstico del Modelo ARIA desde adentro?</p>
         <p class="revela-desc">Los 14 instrumentos del Modelo ARIA aparecen en acción, no en una presentación. Adalid los vive como directivo, no como cliente de consultoría.</p>
       </div>
 
-      <div class="revela-card">
+      <div class="revela-card sr">
         <div class="revela-num">04</div>
         <p class="revela-question">¿Qué hace que 120 días sea suficiente para evidenciar retorno?</p>
         <p class="revela-desc">La secuencia de los 6 Sprints del Modelo ARIA no es arbitraria. La novela documenta por qué el orden importa y qué pasa cuando se altera.</p>
@@ -1496,7 +1543,7 @@ section { padding: 48px 0; }
 
     </div>
 
-    <p class="revela-connector">
+    <p class="revela-connector sr">
       La ficción es el vehículo. La metodología es real.<br>
       <strong>70+ empresas intervenidas con el mismo Modelo que Adalid aplicó.</strong>
     </p>
@@ -2015,6 +2062,64 @@ section { padding: 48px 0; }
   backdrop.addEventListener('click', closePanel);
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && !panel.hidden) closePanel();
+  });
+})();
+</script>
+
+<!-- Scroll-reveal B2–B4 -->
+<script>
+(function() {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Si reduced motion, hacer todo visible de inmediato y salir */
+  if (reduced) {
+    document.querySelectorAll('.sr').forEach(function(el) { el.classList.add('sr-in'); });
+    return;
+  }
+
+  function reveal(el, delay) {
+    setTimeout(function() { el && el.classList.add('sr-in'); }, delay || 0);
+  }
+
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var s = entry.target;
+      io.unobserve(s);
+
+      /* B2 — El Espejo */
+      if (s.classList.contains('block-espejo')) {
+        var card    = s.querySelector('.caso-card.sr');
+        var stats   = s.querySelectorAll('.caso-stat.sr');
+        var content = s.querySelector('.espejo-content.sr');
+        var pull    = s.querySelector('.espejo-pull.sr');
+        reveal(card, 0);
+        stats.forEach(function(el, i) { reveal(el, i * 80); });
+        reveal(content, 100);
+        reveal(pull, 300);
+      }
+
+      /* B3 — Primer Capítulo */
+      if (s.classList.contains('block-preludio')) {
+        reveal(s.querySelector('.preludio-content.sr'),  0);
+        reveal(s.querySelector('.preludio-fragment.sr'), 150);
+      }
+
+      /* B4 — La Tesis */
+      if (s.classList.contains('block-revela')) {
+        var intro     = s.querySelector('.revela-intro.sr');
+        var cards     = s.querySelectorAll('.revela-card.sr');
+        var connector = s.querySelector('.revela-connector.sr');
+        reveal(intro, 0);
+        cards.forEach(function(el, i) { reveal(el, 80 + i * 100); });
+        reveal(connector, 80 + cards.length * 100 + 60);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  ['block-espejo', 'block-preludio', 'block-revela'].forEach(function(cls) {
+    var el = document.querySelector('.' + cls);
+    if (el) io.observe(el);
   });
 })();
 </script>
