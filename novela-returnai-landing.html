@@ -858,6 +858,16 @@ section { padding: 48px 0; }
 }
 .cta-libro-option:hover { opacity: 0.90; transform: translateY(-2px); }
 
+.cta-libro-option--secondary {
+  background: transparent;
+  border: 2px solid var(--dca-gold);
+  color: var(--dca-gold);
+}
+.cta-libro-option--secondary:hover {
+  background: rgba(164,129,17,0.10);
+  opacity: 1;
+}
+
 .cta-libro-option-format {
   font-family: var(--font-body);
   font-weight: 700;
@@ -1623,7 +1633,7 @@ section { padding: 48px 0; }
 
     <h2 class="cta-libro-h2">
       <span class="line">La historia de Adalid.</span>
-      <span class="line">La metodología que puedes aplicar.</span>
+      <span class="line">La solución es tuya.</span>
     </h2>
 
     <span class="cta-libro-gold-line"></span>
@@ -1632,16 +1642,16 @@ section { padding: 48px 0; }
 
     <div class="cta-libro-options">
 
-      <a href="#amazon-link" target="_blank" rel="noopener" class="cta-libro-option">
+      <a href="#amazon-impreso" target="_blank" rel="noopener" class="cta-libro-option cta-libro-option--primary">
+        <span class="cta-libro-option-format">Impreso</span>
+        <span class="cta-libro-option-price">$29.97</span>
+        <span class="cta-libro-option-sub">El libro · Amazon Prime</span>
+      </a>
+
+      <a href="#amazon-ebook" target="_blank" rel="noopener" class="cta-libro-option cta-libro-option--secondary">
         <span class="cta-libro-option-format">Ebook</span>
         <span class="cta-libro-option-price">$19.97</span>
         <span class="cta-libro-option-sub">Lectura inmediata</span>
-      </a>
-
-      <a href="#amazon-link" target="_blank" rel="noopener" class="cta-libro-option">
-        <span class="cta-libro-option-format">Impreso</span>
-        <span class="cta-libro-option-price">$29.97</span>
-        <span class="cta-libro-option-sub">Envío Amazon</span>
       </a>
 
     </div>
