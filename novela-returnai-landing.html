@@ -980,11 +980,10 @@ section { padding: 48px 0; }
 
 /* ═══════════════════════════════════════════
    B8 — AI RETURN TEST (CTA SECUNDARIO)
-   Teal 4% · Borde oro arriba
+   Teal 100% · Cierre de landing
    ═══════════════════════════════════════════ */
 .block-art {
-  background: var(--dca-teal-04);
-  border-top: 3px solid var(--dca-gold);
+  background: var(--dca-teal);
 }
 
 .art-inner {
@@ -994,20 +993,34 @@ section { padding: 48px 0; }
   text-align: center;
 }
 
+.block-art .section-label { color: rgba(255,255,255,0.72); }
+
 .art-inner h2 {
   font-size: clamp(20px, 2.4vw, 28px);
   margin-bottom: 16px;
+  color: #ffffff;
 }
 .art-inner h2 .line { display: block; }
 
 .art-body {
   font-size: 16px;
-  color: rgba(30,42,56,0.72);
+  color: rgba(255,255,255,0.90);
   line-height: 1.7;
   margin-bottom: 32px;
   max-width: 540px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.block-art .btn-primary--gold {
+  background: #ffffff;
+  color: var(--dca-teal);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.block-art .btn-primary--gold:hover {
+  background: rgba(255,255,255,0.92);
+  transform: translateY(-2px);
+  opacity: 1;
 }
 
 /* ═══════════════════════════════════════════
@@ -1770,7 +1783,7 @@ section { padding: 48px 0; }
     <a href="https://tally.so/r/Np6e5W" target="_blank" rel="noopener" class="btn-primary btn-primary--gold">
       Iniciar mi diagnóstico &rarr;
     </a>
-    <span class="cta-support" style="color:rgba(30,42,56,0.52);">25 minutos · Tu reporte es confidencial · Sin compromiso</span>
+    <span class="cta-support" style="color:rgba(255,255,255,0.60);">25 minutos · Tu reporte es confidencial · Sin compromiso</span>
 
   </div>
 </section>
