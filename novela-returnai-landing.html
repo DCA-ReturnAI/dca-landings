@@ -261,7 +261,7 @@ section { padding: 48px 0; }
   .hero-inner {
     grid-template-columns: 1.1fr 0.9fr;
     gap: 72px;
-    align-items: center;
+    align-items: stretch;
   }
 }
 
@@ -307,16 +307,16 @@ section { padding: 48px 0; }
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .novela-cover {
   width: 100%;
-  max-width: 340px;
-  aspect-ratio: 3 / 4;
+  max-width: 280px;
+  height: auto;
+  aspect-ratio: auto;
   border-radius: 4px;
-  object-fit: cover;
-  object-position: center 65%;
+  object-fit: contain;
   display: block;
   background: var(--dca-platinum-bg);
   box-shadow:
@@ -324,8 +324,16 @@ section { padding: 48px 0; }
     0 4px 16px rgba(46,139,118,0.10);
 }
 
-@media (max-width: 767px) {
-  .novela-cover { max-width: 260px; margin: 0 auto; }
+@media (min-width: 768px) {
+  .novela-cover-wrap {
+    height: 100%;
+    align-items: center;
+  }
+  .novela-cover {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+  }
 }
 
 /* Precio — solo como nota de soporte bajo el CTA */
