@@ -278,7 +278,7 @@ Cambio de arquetipo → editar solo ese archivo → deploy
 
 ### Hero — Foto editorial del arquetipo (CANÓNICO 2026-06-29)
 - ✅ Los 7 arquetipos reemplazaron `.hero-video-placeholder` por `<figure class="hero-video"><img class="hero-video__img">` con foto editorial DCA (creada con IA, estándar de marca). Montado en **ambos despliegues**: `landings/ara/<slug>/` (dca-landings) y `website/<slug>/` (dominio).
-- ✅ Imágenes: `images/foto_<arquetipo>.jpg` (JPG q72, 1920×1080, ~256–376 KB; masters PNG en `landings/images/`). WebP pendiente (sin tooling local; el JPG es el fallback canónico del brand book).
+- ✅ Imágenes: `<picture>` con `images/foto_<arquetipo>.webp` (WebP q80, 1920px, ~76–132 KB) + fallback `.jpg` (q72). Hero pasó de PNG ~4 MB a ~90 KB. Masters PNG en `_image-masters/` (top-level, fuera de los subtrees de deploy; conversión con cwebp 1.5.0).
 - ✅ La foto es el **poster del futuro video**: cuando exista, entra como `<video poster="esa-imagen">` sin re-layout.
 - ✅ CSS `.hero-video` + `.hero-video::after` en `ara-styles.css` (ambos repos): overlay `teal 10% / carbón 20%` + `saturate(0.85)`. **Requisito BE, no solo visual:** convierte la escena-problema (p. ej. Amenaza, dashboard rojo en caída) en espejo de identidad sereno; sin overlay picaría aversión a la pérdida como protagonista, prohibido en etapa Solución. Gate UI/UX + BE aprobado.
 - ✅ **ara/v0 (overview):** montada `foto_ara_overview.jpg` (sesión del AI Return Assessment en acción con heatmap IUG en pantalla — solución, no patología; generada con Gemini Nano Banana 2). Swap hecho en `website/ara/` y `landings/ara/`. **Ya no queda ningún `.hero-video-placeholder` en el proyecto.**
