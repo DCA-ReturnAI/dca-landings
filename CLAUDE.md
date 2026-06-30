@@ -54,7 +54,7 @@ Toda landing page de DCA debe tener exactamente **3 CTAs** que apunten a la mism
 | Nombre | Archivo | Objetivo | Estado |
 |--------|---------|----------|--------|
 | AI Return Test | `art/index.html` | Captura top-of-funnel — test gratuito | ✅ Producida |
-| Novela ReturnAI | `novela/index.html` | Venta directa $19.97–$29.97 | ✅ Producida |
+| Novela ReturnAI | `novela-returnai-landing.html` | Venta directa $19.97–$29.97 | ✅ Producida |
 | ARA — Entrada directa | `ara/index.html` | ARA v0 template base | ✅ Producida |
 | ARA — Barco Sin Timón | `ara/barco-sin-timon/index.html` | Arquetipo 01 | ✅ Producida |
 | ARA — Feudos Digitales | `ara/feudos-digitales/index.html` | Arquetipo 02 | ✅ Producida |
@@ -276,10 +276,126 @@ Cambio de arquetipo → editar solo ese archivo → deploy
 **Secciones comunes** (propagadas por script): `entregables · testimoniales · proceso · cta-principal · credibilidad · conectores · tagline`
 **Secciones únicas** (preservadas por archivo): `hero · para-quien · anclaje · refuerzo`
 
+### Hero — Foto editorial del arquetipo (CANÓNICO 2026-06-29)
+- ✅ Los 7 arquetipos reemplazaron `.hero-video-placeholder` por `<figure class="hero-video"><img class="hero-video__img">` con foto editorial DCA (creada con IA, estándar de marca). Montado en **ambos despliegues**: `landings/ara/<slug>/` (dca-landings) y `website/<slug>/` (dominio).
+- ✅ Imágenes: `images/foto_<arquetipo>.jpg` (JPG q72, 1920×1080, ~256–376 KB; masters PNG en `landings/images/`). WebP pendiente (sin tooling local; el JPG es el fallback canónico del brand book).
+- ✅ La foto es el **poster del futuro video**: cuando exista, entra como `<video poster="esa-imagen">` sin re-layout.
+- ✅ CSS `.hero-video` + `.hero-video::after` en `ara-styles.css` (ambos repos): overlay `teal 10% / carbón 20%` + `saturate(0.85)`. **Requisito BE, no solo visual:** convierte la escena-problema (p. ej. Amenaza, dashboard rojo en caída) en espejo de identidad sereno; sin overlay picaría aversión a la pérdida como protagonista, prohibido en etapa Solución. Gate UI/UX + BE aprobado.
+- ✅ **ara/v0 (overview):** montada `foto_ara_overview.jpg` (sesión del AI Return Assessment en acción con heatmap IUG en pantalla — solución, no patología; generada con Gemini Nano Banana 2). Swap hecho en `website/ara/` y `landings/ara/`. **Ya no queda ningún `.hero-video-placeholder` en el proyecto.**
+
+### Bug corregido — CSS de slugs integrados al dominio (2026-06-29)
+- ✅ Los 7 slugs de arquetipo en `website/<slug>/` referenciaban `../ara-styles.css` (inexistente) → **renderizaban sin estilos en el dominio**. Causa: la integración aplanó la estructura `ara/<slug>/` (2 niveles) a `<slug>/` (1 nivel) sin ajustar la ruta relativa. Corregido a `../ara/ara-styles.css`. (Las imágenes `../images/` sí resolvían bien.)
+
 ### Pendiente
 - ⏳ Fine-tuning visual ARA (iniciar por v0, luego propagate.py)
-- ⏳ Insertar videos cuando estén en producción (reemplazar `div.hero-video-placeholder` por iframe/video)
-- ⏳ Iteración Novela ReturnAI (si aplica)
+- ⏳ Generar e insertar imagen de ara/v0 (Gemini) + videos personalizados cuando estén en producción
+### Fine-tuning Novela ReturnAI — CERRADO DEFINITIVO (2026-06-17)
+
+**Archivo:** `landings/novela-returnai-landing.html` (no `novela/index.html` — versión anterior)
+**Producción:** `https://dca-returnai.github.io/dca-landings/novela-returnai-landing.html`
+
+#### B1 Hero — CERRADO (2026-06-16)
+- ✅ Eyebrow: "Modelo ARIA · Novela Ejecutiva · Digital Change Advisors"
+- ✅ H1: $8.2M (corregido desde $3.2M — cifra canónica del caso Adalid Puentes en la novela)
+- ✅ CTA: 2 botones diferenciados — Impreso $29.97 (primario teal) + Ebook $19.97 (outline), side-by-side desktop
+- ✅ Orden precio: Impreso primero — ancla BE al formato premium
+- ✅ CTAs placeholder: `#amazon-impreso` / `#amazon-ebook` — activar con URLs reales cuando existan
+- ✅ Imagen: `object-fit: contain; height: 100%; width: auto` — proporciones naturales a la altura del contenido
+- ✅ Grid hero desktop: `align-items: stretch` — columnas igualan altura del contenido izquierdo
+- ✅ Desplegado en producción
+
+#### B2 El Espejo — CERRADO (2026-06-16)
+- ✅ Opción A elegida: caso alineado a la novela (Adalid Puentes / Seguros Continental)
+- ✅ Inversión: $3.2M → $8.2M (canónico de la novela)
+- ✅ Footer tarjeta: "Gestora de inversiones · Sector financiero" → "Seguros Continental · Sector asegurador"
+- ✅ 4ta estadística: "11%→70% · Tasa de adopción real" — CSS `.caso-stat-num--sm` (22px para que quepa)
+- ✅ P3 umbral: "más de 6 meses" → "más de 12 meses"
+- ✅ Blockquote: atribuido a César Lozano, CEO · Digital Change Advisors — clase `.pull-attribution`
+- ✅ Alt imagen hero: actualizado al caso Adalid Puentes / Seguros Continental
+- ✅ BE copy (H2, P1, P2, P3): identificación → promesa de valor; Diagnóstico → Solución; Modelo ARIA instalado en body; cierre-espejo → value delivery (10 obstáculos, secuencia exacta)
+- ✅ Desplegado en producción
+
+#### B3 Primer Capítulo — CERRADO (2026-06-16)
+- ✅ Corrección total de nomenclatura — 6 elementos corregidos de "preludio" a "primer capítulo":
+  H2 · fragment label · panel tag · panel title · panel timestamp · aria-label cierre
+- ✅ Panel content: texto del preludio → **Capítulo 1 completo** ("El ultimátum de hierro")
+  4 escenas con timestamps, diálogos Ricardo/Laura, lista 10 obstáculos, flashbacks `* * *`, bitácora digital
+- ✅ CSS nuevos en panel: `.preludio-panel__epigraph` · `.preludio-panel__divider` · `.preludio-panel__divider-text` · `.preludio-panel__note` · `.preludio-panel__bitacora` · `.btn-preludio-ebook`
+- ✅ Panel CTA: 2 botones Amazon (Impreso $29.97 oro + Ebook $19.97 outline); enlace ART eliminado
+- ✅ Párrafo estático (izq): reemplazado por identificación situacional — "47 minutos de reunión" / bridge C-Level → Adalid (BE: identificación situacional + curiosity gap)
+- ✅ H2: "comprar" → "comprar el libro" (precisión de objeto)
+- ✅ Fragmento derecho (columna): validado sin cambio — mecanismo Zeigarnik + resonancia emocional funcionando; sin duplicación con homepage (modal del homepage es copy comercial, no prosa narrativa)
+- ✅ Desplegado en producción
+
+#### B4 La Tesis de la Novela — CERRADO (2026-06-16)
+- ✅ Tarjetas: `border-left: 3px solid var(--dca-gold)` + `padding-left: 26px` — "bloques especiales" canónico brand book
+- ✅ Números: teal `rgba(46,139,118,0.15)` → `0.28` — marcadores secuenciales visibles; no compiten con el borde dorado
+- ✅ Párrafo intro: opacidad `0.68` → `0.82` — la frase de diferenciación competitiva merece más peso visual
+- ✅ Connector: `font-style: italic` eliminado — copy de nivel brand book no va en cursiva
+- ✅ Intro copy: "no estaba en la plataforma" → "nunca estuvo en la plataforma" (permanencia + indictment más fuerte)
+- ✅ Q2: "su empresa" → "tu empresa" (voz de marca canónica)
+- ✅ Q1 desc: cierre con curiosity gap activo — "los verás antes de que él mismo sepa nombrarlos"
+- ✅ Connector reescrito (BE): prueba social primero → reencuadre quiasmático al final
+  - Antes: "La ficción es el vehículo. La metodología es real. / 70+ empresas intervenidas..."
+  - Después: "La metodología que documenta la novela opera hoy en 70+ organizaciones. / **La ficción es el formato. La evidencia es real.**"
+- ✅ Copy Q1 desc (2026-06-17): "en la gestora" → "en Seguros Continental" — corrige mezcla de casos; "gestora" pertenece al caso real NDA, no a la novela
+- ✅ Desplegado en producción
+
+#### Sistema de Motion B1–B4 — CERRADO (2026-06-16)
+- ✅ B1 Hero — CSS keyframe page-load (sin scroll): eyebrow 60ms → H1 160ms → chapeau 300ms → CTAs 430ms · portada `dca-cover-in` scale 0.97→1 @ 190ms
+- ✅ B2–B4 — `IntersectionObserver` threshold 0.12, one-shot, stagger via `setTimeout`
+  - B2: caso-card + 4 caso-stats stagger 80ms + espejo-content 100ms + espejo-pull 300ms
+  - B3: preludio-content 0ms + preludio-fragment 150ms
+  - B4: revela-intro 0ms + 4 revela-cards stagger 100ms + revela-connector al final
+- ✅ B4 card hover: `translateY(-4px)` + box-shadow, spring `cubic-bezier(0.34,1.56,0.64,1)` 300ms
+- ✅ B2 métricas: count-up eliminado en sesión posterior; reemplazado por reveal doble etapa (ver B2 ajuste animación)
+- ✅ `@media (prefers-reduced-motion: reduce)` desactiva todo el sistema
+- ✅ Clase `.sr` + `.sr-in` como sistema scroll-reveal reutilizable para bloques futuros
+
+#### B2 Ajuste animación cifras — CERRADO (2026-06-16)
+- ✅ Count-up eliminado de `.caso-stat-num` — atributos `data-count` removidos del HTML; función `revealStat` eliminada del JS
+- ✅ Reemplazado por reveal doble etapa: `.caso-stat` hace translate+fade (`.sr`→`.sr-in`); `.caso-stat-num` hace fade independiente con `opacity: 0→1` + `transition: opacity 0.5s ease 0.25s` (demora 250ms respecto al contenedor)
+- ✅ `.caso-stat.sr-in .caso-stat-num { opacity: 1 }` — el número "cristaliza" en oro después de que la fila se estabiliza
+- ✅ `prefers-reduced-motion`: `.caso-stat-num { opacity: 1 !important; transition: none !important }` en el bloque canónico
+
+#### B5 La Metodología es Verificable — CERRADO (2026-06-16)
+- ✅ H2: `<span class="line">` agregado + regla `.metodo-intro h2 .line { display: block }` en CSS — pirámide L1≥L2 garantizada
+- ✅ P1: cifras eliminadas (duplicaban las tarjetas métricas — violación "no repetición"); reemplazado por "El Modelo ARIA fue construido para que el retorno sea medible, no estimado. Cada componente tiene un output específico en el P&L — no en métricas de actividad."
+- ✅ P2 (referencia ART): eliminado — fork de conversión antes del CTA del libro; el puente hacia ART queda en B10
+- ✅ Pull quote: reescrita desde equivalencia validada + efecto halo — "El Modelo ARIA es la base de ReturnAI — la solución que Adalid implementa en la novela para documentar sus resultados. Lo que él vive en 120 días es exactamente lo que el Modelo produce en campo."
+- ✅ Footer: "Sheridan, Wyoming, EE.UU." → "Firma registrada en EE.UU. · Operaciones en España, USA y Latam"
+- ✅ Métrica `100%` / "Con garantía contractual" → `6` / "Sprints en secuencia invariante" (Opción B — más precisa y narrativa)
+- ✅ Hover delay fix: `transition-delay: 0ms` en `.metric-item:hover` — respuesta inmediata al cursor
+
+#### B6 CTA Primario — CERRADO (2026-06-16)
+- ✅ H2 L1: "La historia de Adalid." → "La historia es de Adalid." — efecto dotación más directo (posesivo verbal, no genitivo)
+- ✅ H2 L2: "La metodología que puedes aplicar." → "La solución es tuya." — efecto dotación + pirámide L1(26)≥L2(21) corregida
+- ✅ Orden CTAs: Ebook/Impreso → **Impreso primero** (izquierda/primario) + Ebook segundo (derecha/secundario) — consistente con B1 Hero, ancla precio alto primero
+- ✅ Jerarquía visual: clase `.cta-libro-option--primary` (gold sólido) · `.cta-libro-option--secondary` (borde gold, fondo transparente sobre carbón, texto gold)
+- ✅ Sub-label Impreso: "Envío Amazon" → "El libro · Amazon Prime" — frame de objeto tangible, no proceso logístico
+- ✅ Placeholders actualizados: `href="#amazon-link"` (ambos) → `href="#amazon-impreso"` / `href="#amazon-ebook"` — consistentes con B1 Hero
+
+#### B7 Para quién es / Para quién no es — CERRADO (2026-06-16)
+- ✅ H2: "ReturnAI no es para todos los lectores" → "ReturnAI es una lectura de directivo, no de entusiasta." — apertura desde identidad positiva, sin fricción negativa pre-calificación
+- ✅ Subtítulo: "...reconozca a Adalid como un espejo, no como un caso ajeno." → "...reconozca en Adalid su propio diagnóstico." — elimina cláusula defensiva; "su propio diagnóstico" más específico y ejecutivo que "un espejo"
+- ✅ Ítem 3 "Para quién es": sin prerequisito ART — "quiere ver el Modelo ARIA aplicado a un caso completo antes de comprometerse con una intervención" (visitante sin ART previo puede identificarse)
+- ✅ Ítem 4 "Para quién es": referencia a Alejandro Ríos eliminada (solo funcionaba para un canal) → calificador universal: "Directivo que ya entiende que el problema no es la IA — es la organización — y quiere ver cómo se resuelve en 120 días"
+- ✅ "Para quién no es" ítem 3: conservado sin cambio — mecanismo de aversión a pérdida invertida funciona perfectamente
+
+**Regla B7 Novela:** H2 siempre desde identidad positiva — nunca abrir con "no es para todos" u otra negación antes de que el visitante se haya auto-identificado en el "sí".
+
+#### B8 ART Conector — CERRADO (2026-06-16)
+- ✅ H2: "¿Ya leíste la novela? / El AI Return Test es tu siguiente paso." → "Lo que Adalid aplicó en el Capítulo 3. / Gratuito. 25 minutos." — elimina prerequisito de lectura; funciona para Perfil A (ya leyó) y Perfil B (aún no compró)
+- ✅ Body primera oración (versión final 2026-06-17): "El instrumento que Adalid usó en el Capítulo 3 para establecer su línea base y alcanzar el retorno." — elimina redundancia con eyebrow; ancla narrativo al capítulo + destino (retorno)
+- ✅ Bloque gris footer-connectors eliminado: las dos tarjetas (ART duplicado + ARA $5,000) generaban sobrecarga de elección y fork de precio abrupto ($29.97 → $5,000)
+- ✅ Fondo: teal 4% → **teal 100% `#2e8b76`** — cierre visual fuerte de la landing; excepción aprobada al anti-patrón "fondo teal sólido como sección"
+- ✅ Colores sobre teal 100%: eyebrow `rgba(255,255,255,0.72)` · H2 `#ffffff` (4.6:1 WCAG AA) · body `rgba(255,255,255,0.90)` · soporte `rgba(255,255,255,0.60)` · barra acento oro sin cambio
+- ✅ Botón CTA: gold sólido → **blanco `#ffffff` con texto teal** — máximo contraste sobre fondo teal; espacio blanco del brand vive dentro del botón
+
+**Excepción canónica al anti-patrón (2026-06-16):** "Fondo teal sólido como sección" está prohibido en el cuerpo de páginas. Excepción aprobada: bloque de cierre final de landing cuando es el último elemento antes del footer y su función es diferenciada del CTA de conversión principal (B6/carbón). Condiciones: un solo bloque por landing, fondo teal sólido solo en posición de cierre.
+
+#### Pendiente externo — Novela
+- ⏳ Amazon URLs: `href="#amazon-impreso"` / `href="#amazon-ebook"` en B1 Hero, B3 panel y B6 CTA → activar con URLs reales de Amazon cuando el libro esté listado (acción externa, no bloquea el cierre del fine-tuning)
 
 ### Fine-tuning ART — CERRADO DEFINITIVO (2026-06-09)
 - ✅ Repo `dca-landings` creado y remote `production-landings` configurado
